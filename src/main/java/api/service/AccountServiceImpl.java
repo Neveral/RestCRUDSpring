@@ -1,7 +1,9 @@
 package api.service;
 
 
+import api.model.Group;
 import api.model.User;
+import api.repository.GroupRepository;
 import api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +19,16 @@ public class AccountServiceImpl implements AccountService{
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private GroupRepository groupRepository;
+
     @Override
-    public User findById(long id) {
+    public User findUserById(long id) {
         return userRepository.findOne(id); // or getOne()????
     }
 
     @Override
-    public User findByLogin(String login) {
+    public User findUserByLogin(String login) {
         return userRepository.findByLogin(login);
     }
 
@@ -50,5 +55,30 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Group findGroupByName(String groupName) {
+        return groupRepository.findByName(groupName);
+    }
+
+    @Override
+    public Group getGroupById(Long id) {
+        return groupRepository.findOne(id);
+    }
+
+    @Override
+    public List<Group> findAllGroups() {
+        return groupRepository.findAll();
+    }
+
+    @Override
+    public Long updateGroup(Group group) {
+        return groupRepository.saveAndFlush(group).getId();
+    }
+
+    @Override
+    public boolean isGroupExist(Group group) {
+        return groupRepository.exists(group.getId());
     }
 }

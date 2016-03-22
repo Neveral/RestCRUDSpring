@@ -2,6 +2,9 @@ package api.model;
 
 
 import api.constant.PatternConstants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -106,6 +109,7 @@ public class User {
         return login;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -134,6 +138,7 @@ public class User {
         return last_name;
     }
 
+    @JsonIgnore
     public String getSalt() {
         return salt;
     }
@@ -158,6 +163,7 @@ public class User {
         this.login = login;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
@@ -194,6 +200,7 @@ public class User {
         this.deleted = is_deleted;
     }
 
+    @JsonProperty
     public void setSalt(String salt) {
         this.salt = salt;
     }

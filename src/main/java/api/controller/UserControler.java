@@ -36,7 +36,7 @@ public class UserControler {
         @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
         public ResponseEntity<User> getUser(@PathVariable("id") long id) {
             System.out.println("Fetching User with id " + id);
-            User user = userService.findById(id);
+            User user = userService.findUserById(id);
             if (user == null) {
                 System.out.println("User with id " + id + " not found");
                 return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -71,7 +71,7 @@ public class UserControler {
         public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody User user) {
             System.out.println("Updating User " + id);
 
-            User currentUser = userService.findById(id);
+            User currentUser = userService.findUserById(id);
 
             if (currentUser==null) {
                 System.out.println("User with id " + id + " not found");
@@ -90,7 +90,7 @@ public class UserControler {
         public ResponseEntity<User> deleteUser(@PathVariable("id") long id) {
             System.out.println("Fetching & Deleting User with id " + id);
 
-            User user = userService.findById(id);
+            User user = userService.findUserById(id);
             if (user == null) {
                 System.out.println("Unable to delete. User with id " + id + " not found");
                 return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
